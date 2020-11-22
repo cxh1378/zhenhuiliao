@@ -22,7 +22,7 @@ HiChat.prototype = {
     this.socket.on('connect', function () {
       document.getElementById('info').textContent =
         'Please set your nickname :)'
-      document.getElementById('nickWrapper').style.display = 'block'
+      document.getElementById('nickWrapper').style.display = 'flex'
       document.getElementById('nicknameInput').focus()
     })
     this.socket.on('nickExisted', function () {
@@ -96,9 +96,9 @@ HiChat.prototype = {
     document.getElementById('messageInput').addEventListener(
       'keyup',
       function (e) {
+        let msg = messageInput.value,
+          color = document.getElementById('colorStyle').value
         if (e.keyCode == 13 && msg.trim().length != 0) {
-          let msg = messageInput.value,
-            color = document.getElementById('colorStyle').value
           messageInput.value = ''
           that.socket.emit('postMsg', msg, color)
           that._displayNewMsg('me', msg, color)
